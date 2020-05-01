@@ -1,0 +1,7 @@
+{
+  "name": "wot-interactive-ionic-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
