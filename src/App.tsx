@@ -1,8 +1,10 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { Route, Redirect } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { help, settings, map } from 'ionicons/icons';
+import Home from './pages/Home/Home';
+import Sandbox from './pages/Sandbox/Sandbox'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -22,14 +24,33 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Account from './pages/Account/Account';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/home" component={Home} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-      </IonRouterOutlet>
+      <IonTabs>
+          <IonRouterOutlet>
+              <Redirect exact path="/" to="/account" />
+              <Route exact path="/account"  render={() => <Account/>}/>
+              <Route exact path="/home"  render={() => <Home/>}/>
+              <Route exact path="/sandbox"  render={() => <Sandbox/>}/>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+              <IonTabButton tab="home" href="/home">
+                  <IonIcon icon={map} />
+                  <IonLabel>Home</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="account" href="/account">
+                  <IonIcon icon={settings}/>
+                  <IonLabel>Account</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="sandbox" href="/sandbox">
+                  <IonIcon icon={help} />
+                  <IonLabel>Sandbox</IonLabel>
+              </IonTabButton>
+          </IonTabBar>
+      </IonTabs>
     </IonReactRouter>
   </IonApp>
 );
