@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { help, settings, map } from 'ionicons/icons';
-import Home from './pages/Home/Home';
+import { help, filter, map } from 'ionicons/icons';
+import Map from './pages/Map/Map';
 import Sandbox from './pages/Sandbox/Sandbox'
 
 /* Core CSS required for Ionic components to work properly */
@@ -24,26 +24,26 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Account from './pages/Account/Account';
+import Filters from './pages/Filters/Filters';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
           <IonRouterOutlet>
-              <Redirect exact path="/" to="/account" />
-              <Route exact path="/account"  render={() => <Account/>}/>
-              <Route exact path="/home"  render={() => <Home/>}/>
+              <Redirect exact path="/" to="/filters" />
+              <Route exact path="/filters"  render={() => <Filters/>}/>
+              <Route exact path="/map"  render={() => <Map/>}/>
               <Route exact path="/sandbox"  render={() => <Sandbox/>}/>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-              <IonTabButton tab="home" href="/home">
+              <IonTabButton tab="map" href="/map">
                   <IonIcon icon={map} />
-                  <IonLabel>Home</IonLabel>
+                  <IonLabel>Map</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="account" href="/account">
-                  <IonIcon icon={settings}/>
-                  <IonLabel>Account</IonLabel>
+              <IonTabButton tab="filters" href="/filters">
+                  <IonIcon icon={filter}/>
+                  <IonLabel>Filters</IonLabel>
               </IonTabButton>
               <IonTabButton tab="sandbox" href="/sandbox">
                   <IonIcon icon={help} />

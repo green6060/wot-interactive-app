@@ -1,8 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import './Home.css';
+import './Map.css';
 
-const Home: React.FC = () => {
+const Map: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -22,21 +22,6 @@ const Home: React.FC = () => {
               ion-loading (https://ionicframework.com/docs/api/loading) for loading map
             </li>
             <li>
-              ion-toggle (https://ionicframework.com/docs/api/toggle) for toggeling various map filters
-            </li>
-            <li>
-              ion-chip (https://ionicframework.com/docs/api/chip) for toggeling various map filters
-            </li>
-            <li>
-              ion-checkbox (https://ionicframework.com/docs/api/checkbox) for toggeling various map filters
-            </li>
-            <li>
-              ion-radio (https://ionicframework.com/docs/api/radio) for toggeling various map filters
-            </li>
-            <li>
-              ion-fab (https://ionicframework.com/docs/api/fab) as a button, to pop out a menu housing filters
-            </li>
-            <li>
               ion-badge (https://ionicframework.com/docs/api/badge) for informational purposes, regarding the interactive map
             </li>
             <li>
@@ -48,4 +33,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Map;
