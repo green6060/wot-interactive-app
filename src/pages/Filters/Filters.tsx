@@ -1,22 +1,40 @@
 /* eslint-disable no-lone-blocks */
-import React from 'react'
-import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItemDivider, IonItem, IonLabel, IonToggle, IonSegment, IonSegmentButton } from '@ionic/react';
+import React, { SetStateAction } from 'react'
+import { 
+    IonPage, 
+    IonContent, 
+    IonHeader, 
+    IonToolbar, 
+    IonTitle, 
+    IonList, 
+    IonItemDivider, 
+    IonItem, 
+    IonLabel, 
+    IonToggle, 
+    IonSegment, 
+    IonSegmentButton, 
+    IonButton 
+} from '@ionic/react';
+import { IonPick } from '../../components/IonPick/IonPick';
 
 const Filters: React.FC = () => {
     const [filterSpoilers, setFilterSpoilers] = React.useState(true)
     const [seriesMedium, setSeriesMedium] = React.useState('')
+    const [pickerResult, setPickerResult] = React.useState('')
+    const [isPickerOpen, setIsPickerOpen] = React.useState(false)
 
-    const toggleSpoilerStatus = (e:CustomEvent) =>{
+    const toggleSpoilerStatus = (checked: SetStateAction<boolean>) =>{
         // Eventually, we will swap this out for useContext
-        setFilterSpoilers(e.detail.event)
-        if (e.detail.event === false) {
+        setFilterSpoilers(checked)
+        if (checked === false) {
             setSeriesMedium('')
+            setPickerResult('')
         }
     }
 
-    const toggleSeriesMedium = (e:CustomEvent) =>{
+    const toggleSeriesMedium = (medium: SetStateAction<string>) =>{
         // Eventually, we will swap this out for useContext
-        setSeriesMedium(e.detail.event)
+        setSeriesMedium(medium)
     }
 
     return (
@@ -31,21 +49,54 @@ const Filters: React.FC = () => {
                     <IonItemDivider> Spoiler Settings </IonItemDivider>
                     <IonItem>
                         <IonLabel>Remove Spoilers</IonLabel>
-                        <IonToggle checked={filterSpoilers} onIonChange={e => toggleSpoilerStatus(e)} />
+                        <IonToggle checked={filterSpoilers} onIonChange={e => toggleSpoilerStatus(e.detail.checked)} />
                     </IonItem>
                     
                     {/* Are Spoilers to be filtered? If so, display ion-segment book / season filter */}
                     { filterSpoilers === true && 
-                    <IonSegment onIonChange={e => toggleSeriesMedium(e)}>
-                        <IonSegmentButton value="book">
-                            <IonLabel>Book</IonLabel>
-                        </IonSegmentButton>
-                        <IonSegmentButton value="tvSeries">
-                            <IonLabel>Amazon Series</IonLabel>
-                        </IonSegmentButton>
-                    </IonSegment>}
-                    {/* Are Book / Season segments toggled? If so, display ion-select book / season filter */}
+                        <IonSegment onIonChange={e => toggleSeriesMedium(e.detail.value!)}>
+                            <IonSegmentButton value="book">
+                                <IonLabel>Book</IonLabel>
+                            </IonSegmentButton>
+                            <IonSegmentButton value="tvSeries">
+                                <IonLabel>Amazon Series</IonLabel>
+                            </IonSegmentButton>
+                        </IonSegment>
+                    }
 
+                    {/* Are Book / Season segments toggled? If so, display ion-select book / season filter */}
+                    { seriesMedium !== '' &&
+                        <>
+                            <IonItem>
+                                <IonButton
+                                    style={{width: '100%'}}
+                                    onClick={() => {
+                                        setIsPickerOpen(true);
+                                    }}
+                                >
+                                    Select Book or Season
+                                </IonButton>
+                            </IonItem>
+                                <IonItem
+                                    onClick={() => {
+                                        setIsPickerOpen(true);
+                                    }}
+                                >
+                                {pickerResult !== '' && (
+                                    <IonLabel  style={{textAlign: "center"}}>
+                                        {pickerResult}
+                                    </IonLabel>
+                                )}
+                            </IonItem>
+
+                            <IonPick
+                                isOpen={isPickerOpen}
+                                onSave={(value:any) => {setPickerResult(value); setIsPickerOpen(false)}} 
+                                onCancel={() => {setIsPickerOpen(false)}} 
+                                medium={seriesMedium}
+                            ></IonPick>
+                        </>
+                    }
                 </IonList>
             </IonContent>
         </IonPage>

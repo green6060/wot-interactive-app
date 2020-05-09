@@ -4,7 +4,7 @@ import { call, home, heart, pin, star, globe, basket, camera, bookmark } from 'i
 
 const Sandbox = () => {
     const [checked, setChecked] = React.useState(false);
-
+    
     return (
         <IonPage>
             <IonHeader>
@@ -141,6 +141,7 @@ const Sandbox = () => {
                         <IonLabel>Javascript</IonLabel>
                     </IonSegmentButton>
                 </IonSegment>
+
             </IonContent>
         </IonPage>
     )
