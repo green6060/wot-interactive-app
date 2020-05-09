@@ -2,9 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { help, filter, map } from 'ionicons/icons';
+import { help, filter, map, card} from 'ionicons/icons';
 import Map from './pages/Map/Map';
-import Sandbox from './pages/Sandbox/Sandbox'
+import Donate from './pages/Donate/Donate';
+import Sandbox from './pages/Sandbox/Sandbox';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,6 +35,7 @@ const App: React.FC = () => (
               <Redirect exact path="/" to="/filters" />
               <Route exact path="/filters"  render={() => <Filters/>}/>
               <Route exact path="/map"  render={() => <Map/>}/>
+              <Route exact path="/donate" render={() => <Donate/>}/>
               <Route exact path="/sandbox"  render={() => <Sandbox/>}/>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
@@ -44,6 +46,10 @@ const App: React.FC = () => (
               <IonTabButton tab="filters" href="/filters">
                   <IonIcon icon={filter}/>
                   <IonLabel>Filters</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="donate" href="/donate">
+                  <IonIcon icon={card}/>
+                  <IonLabel>Donate</IonLabel>
               </IonTabButton>
               <IonTabButton tab="sandbox" href="/sandbox">
                   <IonIcon icon={help} />
