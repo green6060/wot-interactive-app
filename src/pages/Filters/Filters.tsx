@@ -69,7 +69,7 @@ const Filters: React.FC = () => {
                         <>
                             <IonItem>
                                 <IonButton
-                                    style={{width: '100%'}}
+                                    style={{width: '75%'}}
                                     onClick={() => {
                                         setIsPickerOpen(true);
                                     }}
